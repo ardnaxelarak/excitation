@@ -31,6 +31,7 @@
   --rounding-height: 3px;
   --icon-size: 30px;
   --small-panel: 4em;
+  --sidebar-width: 400px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -71,18 +72,17 @@ button:focus-visible {
 }
 
 #review-panel {
-
   &.large {
     position: relative;
-    display: grid;
-    grid-template-columns: 400px auto;
+    display: flex;
     align-items: start;
     background-color: var(--color-base);
     color: var(--color-text);
-    overflow: scroll;
+    flex-grow: 1;
   }
 
   &.small {
+    height: var(--small-panel);
     background-color: var(--color-base);
   }
 }
@@ -143,8 +143,12 @@ button:focus-visible {
 #sidebar {
   display: grid;
   grid-template-columns: 10px 10px 10px 10px auto 10px;
+  grid-template-rows: min-content min-content auto;
   background-color: var(--color-base);
-  overflow-y: scroll;
+  width: var(--sidebar-width);
+  flex-shrink: 0;
+  height: 100%;
+  overflow-y: auto;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -454,13 +458,17 @@ button:focus-visible {
 }
 
 #viewer {
-  /* position: relative;
-  max-height: 100%; */
+  /* position: relative; */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 #viewer-viewport {
   position: relative;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .viewer-page {
@@ -559,7 +567,13 @@ button:focus-visible {
 #answer-panel {
   background-color: lightgoldenrodyellow;
 
+  &.large {
+    flex-grow: 1;
+  }
+
   &.small {
+    height: var(--small-panel);
+    flex-shrink: 0;
     #edit-answer {
       height: 1.5em;
     }
@@ -568,56 +582,17 @@ button:focus-visible {
 
 #app {
   height: 100vh;
-
-  &.question-large.review-large.answer-small {
-    #question-panel {
-      height: calc((100vh - var(--small-panel))/2);
-    }
-    #review-panel {
-      height: calc((100vh - var(--small-panel))/2);
-    }
-    #answer-panel {
-      height: var(--small-panel);
-    }
-  }
-  &.question-large.review-small.answer-large {
-    #question-panel {
-      height: calc((100vh - var(--small-panel))/2);
-    }
-    #review-panel {
-      height: var(--small-panel);
-    }
-    #answer-panel {
-      height: calc((100vh - var(--small-panel))/2);
-    }
-  }
-  &.question-small.review-large.answer-small {
-    #question-panel {
-      height: var(--small-panel);
-    }
-    #review-panel {
-      height: calc(100vh - var(--small-panel) * 2);
-    }
-    #answer-panel {
-      height: var(--small-panel);
-    }
-  }
-  &.question-small.review-small.answer-large {
-    #question-panel {
-      height: var(--small-panel);
-    }
-    #review-panel {
-      height: var(--small-panel);
-    }
-    #answer-panel {
-      height: calc(100vh - var(--small-panel) * 2);
-    }
-  }
-  /* code ensures that we never end up with the other 4 combinations */
+  display: flex;
+  flex-direction: column;
 }
 
 #question-panel {
-  background-color: lightcyan
+  background-color: lightcyan;
+  flex-shrink: 0;
+
+  &.small {
+    height: var(--small-panel);
+  }
 }
 
 #question-container {
