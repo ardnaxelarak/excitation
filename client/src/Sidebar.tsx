@@ -119,7 +119,6 @@ export function Sidebar() {
   return (
     <div id="sidebar" onClick={dispatchUnlessError({ type: "selectCitation" })}>
       <h4 id="citations-label">Citations</h4>
-      <div className="sidebar-divider" />
       <div id="docs">
         {groupedCitations.map(
           ({
@@ -132,7 +131,6 @@ export function Sidebar() {
           }) => {
             return (
               <div className="doc" key={documentId}>
-                <DocSpacer docSelected={docSelected} className="prefix" />
                 <div
                   className={`doc-main ${
                     docSelected ? "selected" : "unselected"
@@ -197,8 +195,6 @@ export function Sidebar() {
                     />
                   </div>
                 </div>
-                {!docSelected && <div className="sidebar-divider" />}
-                <DocSpacer docSelected={docSelected} className="suffix" />
               </div>
             );
           }
@@ -245,7 +241,6 @@ export function Sidebar() {
           <br />
           <br />
         </div>
-        <div className="sidebar-divider" />
       </div>
     </div>
   );
@@ -298,7 +293,6 @@ const DocHeader = ({
           <div />
         </div>
       )}
-      {noCitations && <div className="sidebar-divider" />}
     </>
   );
 };

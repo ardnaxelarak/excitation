@@ -22,6 +22,7 @@ export const ReviewPanel = () => {
   return largeReviewPanel ? (
     <div id="review-panel" className="panel large">
       <Sidebar />
+      <div className="sidebar-divider" />
       <div id="viewer">
         <NavBar />
         <Viewer />

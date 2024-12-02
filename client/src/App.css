@@ -32,6 +32,7 @@
   --icon-size: 30px;
   --small-panel: 4em;
   --sidebar-width: 400px;
+  --spacer-width: 10px;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -76,7 +77,7 @@ button:focus-visible {
     position: relative;
     display: flex;
     align-items: start;
-    background-color: var(--color-base);
+    background-color: var(--color-doc-active);
     color: var(--color-text);
     flex-grow: 1;
   }
@@ -141,14 +142,14 @@ button:focus-visible {
 }
 
 #sidebar {
-  display: grid;
-  grid-template-columns: 10px 10px 10px 10px auto 10px;
-  grid-template-rows: min-content min-content auto;
-  background-color: var(--color-base);
+  display: flex;
+  flex-direction: column;
   width: var(--sidebar-width);
   flex-shrink: 0;
   height: 100%;
+  padding-left: var(--spacer-width);
   overflow-y: auto;
+  z-index: 1;
 
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -156,15 +157,6 @@ button:focus-visible {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-
-#citations-label {
-  grid-column: 2 / 6;
-}
-
-#sidebar-header {
-  grid-column: 2/ 6;
-  margin: 0 10px 0 10px;
 }
 
 #question-nav {
@@ -177,7 +169,10 @@ button:focus-visible {
 }
 
 .sidebar-divider {
-  background-color: var(--color-doc-active);
+  position: absolute;
+  width: var(--sidebar-width);
+  background-color: var(--color-base);
+  height: 100%;
 }
 
 .question {
@@ -209,21 +204,17 @@ button:focus-visible {
 }
 
 #docs {
-  grid-column: 1 / 7;
-  display: grid;
-  grid-template-columns: subgrid;
+  display: flex;
+  flex-direction: column;
 }
 
 .doc {
-  grid-column: 1 / 7;
-  display: grid;
-  grid-template-columns: subgrid;
+  /* padding-left: var(--spacer-width); */
+  display: flex;
+  flex-direction: column;
 }
 
 .doc-spacer {
-  grid-column: 5 / 7;
-  display: grid;
-  grid-template-columns: subgrid;
   background-color: var(--color-doc-active);
 
   div {
@@ -239,17 +230,16 @@ button:focus-visible {
 }
 
 .doc-main {
-  grid-column-start: 2;
-  display: grid;
-  grid-template-columns: subgrid;
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--spacer-width);
   border-radius: var(--rounding-height) 0 0px var(--rounding-height);
+
   &.selected {
-    grid-column-end: 7;
     background-color: var(--color-doc-active);
   }
   &.unselected {
     border-radius: var(--rounding-height) 0 0 var(--rounding-height);
-    grid-column-end: 6;
   }
   &.unselected:hover {
     background-color: var(--color-doc-hover);
@@ -264,10 +254,8 @@ button:focus-visible {
 }
 
 .doc-header {
-  grid-column: 1 / 5;
+  display: flex;
   padding: 3px 0 3px 0px;
-  display: grid;
-  grid-template-columns: 5% 95%;
 }
 
 .bottom-right {
@@ -281,10 +269,13 @@ button:focus-visible {
 }
 
 .page-group {
-  grid-column: 2 / 6;
+  display: flex;
+  flex-direction: column;
+  padding-left: var(--spacer-width);
+  padding-right: var(--spacer-width);
+
   border-radius: var(--rounding-height) 0 0 var(--rounding-height);
-  display: grid;
-  grid-template-columns: subgrid;
+
   &.selected {
     background-color: var(--color-page-active);
     color: var(--color-text-page-active);
@@ -306,16 +297,8 @@ button:focus-visible {
 }
 
 .page-header {
+  display: flex;
   padding: 3px 0 5px 0;
-  grid-column-start: 1;
-  display: grid;
-  grid-template-columns: 5% 95%;
-  &.selected {
-    grid-column-end: 5;
-  }
-  &.unselected {
-    grid-column-end: 4;
-  }
 }
 
 .top-right {
@@ -329,11 +312,9 @@ button:focus-visible {
 }
 
 .citation {
-  grid-column-start: 2;
-  display: grid;
+  display: flex;
+  padding-left: var(--spacer-width);
   margin: 0 0 3px 0;
-  grid-column-end: 4;
-  grid-template-columns: 5% 95%;
   grid-template-rows: 1.5em;
   .citation-excerpt {
     margin-top: -1px;
@@ -423,30 +404,21 @@ button:focus-visible {
 }
 
 .doc-footer {
-  grid-column: 6;
-  background-color: var(--color-page-active);
-
   div {
     height: 5px;
-    background-color: var(--color-doc-active);
     &.last-page-group-selected {
       border-radius: 0 var(--rounding-height) 0 0px;
     }
-    &.unselected {
-      background-color: var(--color-base);
+    &.selected, &.last-page-group-selected {
+      background-color: var(--color-doc-active);
     }
   }
 }
 
 .icon {
   pointer-events: all;
-  height: 100%;
-  width: 100%;
-}
-
-.buttons {
-  grid-column: 2 / 6;
-  padding-right: 15px;
+  height: 1.3em;
+  width: 1.3em;
 }
 
 .action {

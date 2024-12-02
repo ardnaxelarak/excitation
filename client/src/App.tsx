@@ -17,7 +17,7 @@ function App() {
 
   const { ux: { largeQuestionPanel, largeAnswerPanel, largeReviewPanel } } = useAppStateValue();
   return (
-    <div id="app" className={`question-${largeSmall(largeQuestionPanel)} review-${largeSmall(largeReviewPanel)} answer-${largeSmall(largeAnswerPanel)}`}>
+    <div id="app">
       <QuestionPanel />
       <ReviewPanel />
       <AnswerPanel />
